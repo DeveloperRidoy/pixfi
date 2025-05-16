@@ -14,11 +14,13 @@
 
 ## 🖼️ UI Preview
 
-| Pixel Canvas | Place Pixel Modal | Donation Progress |
-|--------------|-------------------|-------------------|
-| ![Canvas](canvas-demo.png) | ![Modal](place-pixel.png) | ![Progress](progress-bar.png) |
+| Home Page | Pixel Campaign View |
+|-----------|---------------------|
+| ![Home Page](https://i.postimg.cc/NGz4t77K/Screenshot-2025-05-16-112256.png) | ![Pixel Canvas](https://i.postimg.cc/j2mQhtdH/Screenshot-2025-05-16-112752.png) |
 
-> *Built with a clean, responsive UI using Tailwind and Konva.js. Real-time interaction meets blockchain trust.*
+| Place Pixel Modal | Create Campaign Form |
+|-------------------|----------------------|
+| ![Place Pixel](https://i.postimg.cc/bJ6Rs17F/Screenshot-2025-05-16-113103.png) | ![Create Campaign](https://i.postimg.cc/D08Ps8Ff/Screenshot-2025-05-16-112812.png) |
 
 ---
 
