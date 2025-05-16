@@ -26,13 +26,13 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 99%;
     --foreground: 240 10% 3.9%;
     --card: 270 100% 98%;
     --card-foreground: 270 100% 25%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 270 100% 50%;
+    --primary: 327 100% 50%;
     --primary-foreground: 0 0% 100%;
     --secondary: 270 100% 90%;
     --secondary-foreground: 270 100% 20%;

@@ -19,3 +19,8 @@ export const MAIL_SMTP_PASSWORD = process.env.MAIL_SMTP_PASSWORD as string;
 
 export const OPENAI_API_KEY = process.env.OPENAI_API_KEY as string;
 
+export const WESTEND_RPC = "wss://westend-rpc.polkadot.io";
+
+// Use your own Westend testnet address here
+export const RECEIVER_ADDRESS =
+  "5GpGw1v4RL2hCC9She6zxPUze8t3EfSfNaudEtuxnj4CUa7N";
