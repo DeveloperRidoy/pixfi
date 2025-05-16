@@ -19,7 +19,6 @@ export default function PixelCanvas({
   campaign,
   onDonate,
 }: Readonly<PixelCanvasProps>) {
-  console.log(campaign)
   const { user } = useAuthContext();
   const router = useRouter();
   const canvasRef = useRef<HTMLCanvasElement>(null);
