@@ -25,7 +25,7 @@
 ## 🎥 Live Demos
 
 ### ▶️ Product Demo (UX + Smart Contract in Action)
-[![Watch PixFi Demo](demo-thumb.png)](demo.mp4)
+[![Watch PixFi Demo on YouTube](https://img.youtube.com/vi/xDweSbLXXWQ/hqdefault.jpg)](https://www.youtube.com/watch?v=xDweSbLXXWQ)
 
 → *Click to watch how users place pixels, connect wallets, and trigger smart contract interactions.*
 
