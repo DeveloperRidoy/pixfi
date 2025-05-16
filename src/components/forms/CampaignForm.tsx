@@ -283,7 +283,7 @@ const CampaignForm: FC<CampaignFormProps> = ({
         <FormField
           control={form.control}
           name="escrowEnabled"
-          render={({ field }) => (
+          render={() => (
             <FormItem>
               <FormLabel>Enable Escrow?</FormLabel>
               <FormControl>
