@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.3",
     "@hookform/resolvers": "^5.0.1",
     "@polkadot/api": "^15.10.2",
     "@polkadot/extension-dapp": "^0.58.10",
@@ -27,6 +28,7 @@
     "bcrypt": "^6.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "headlessui": "^0.0.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.510.0",
     "mongoose": "^8.14.3",

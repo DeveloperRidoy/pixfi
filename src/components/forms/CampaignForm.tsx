@@ -27,6 +27,7 @@ import {
 import { ICampaign } from "@/types/campaign.types";
 import { EApiRequestMethod } from "@/types/api.types";
 import { Checkbox } from "../ui/checkbox";
+import { Disclosure } from "@headlessui/react";
 
 const refundOptions = ["full", "partial", "none"] as const;
 
@@ -135,10 +136,11 @@ const CampaignForm: FC<CampaignFormProps> = ({
                 <Image
                   src={previewImage}
                   alt="Preview"
-                  width={200}
-                  height={200}
-                  className="rounded mt-2"
+                  width={240}
+                  height={240}
+                  className="rounded-lg border mt-3 object-cover"
                 />
+
               )}
               <FormMessage />
             </FormItem>
@@ -216,7 +218,7 @@ const CampaignForm: FC<CampaignFormProps> = ({
         />
 
         {/* Grid Size */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="gridSize.width"
@@ -285,11 +287,18 @@ const CampaignForm: FC<CampaignFormProps> = ({
             <FormItem>
               <FormLabel>Enable Escrow?</FormLabel>
               <FormControl>
-                <Checkbox
-                  className="h-5 w-5 ml-5"
-                  checked={field.value}
-                  onCheckedChange={(checked) => field.onChange(checked)}
-                />
+                <div className="flex items-center space-x-3 mt-1">
+                  <Checkbox
+                    className="h-5 w-5"
+                    checked={true}
+                    disabled
+                    id="escrow"
+                  />
+                  <label htmlFor="escrow" className="text-sm text-gray-700">
+                    Escrow is enabled by default
+                  </label>
+                </div>
+
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -297,50 +306,65 @@ const CampaignForm: FC<CampaignFormProps> = ({
         />
 
         {/* Optional Settings */}
-        <FormField
-          control={form.control}
-          name="cooldown"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Cooldown (sec, optional)</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Optional"
-                  value={field.value ?? ""}
-                  onChange={(e) =>
-                    field.onChange(
-                      e.target.value === "" ? undefined : Number(e.target.value)
-                    )
-                  }
+        <Disclosure>
+          {({ open }) => (
+            <div className=" pt-6 mt-6">
+              <Disclosure.Button className="text-sm font-medium text-primary hover:underline focus:outline-none">
+                {open ? "Hide Advanced Settings" : "Show Advanced Settings"}
+              </Disclosure.Button>
+
+              <Disclosure.Panel className="mt-4 space-y-6">
+                {/* Cooldown */}
+                <FormField
+                  control={form.control}
+                  name="cooldown"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Cooldown (sec, optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="Optional"
+                          value={field.value ?? ""}
+                          onChange={(e) =>
+                            field.onChange(
+                              e.target.value === "" ? undefined : Number(e.target.value)
+                            )
+                          }
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="lockDuration"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Tile Lock Duration (sec, optional)</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder="Optional"
-                  value={field.value ?? ""}
-                  onChange={(e) =>
-                    field.onChange(
-                      e.target.value === "" ? undefined : Number(e.target.value)
-                    )
-                  }
+                {/* Lock Duration */}
+                <FormField
+                  control={form.control}
+                  name="lockDuration"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tile Lock Duration (sec, optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="Optional"
+                          value={field.value ?? ""}
+                          onChange={(e) =>
+                            field.onChange(
+                              e.target.value === "" ? undefined : Number(e.target.value)
+                            )
+                          }
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+              </Disclosure.Panel>
+            </div>
           )}
-        />
+        </Disclosure>
+
 
         {/* Submit */}
         <Button type="submit" className="w-full text-lg">

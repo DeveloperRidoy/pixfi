@@ -30,77 +30,57 @@ export default function CampaignPage({
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold mb-4">{campaign.title}</h1>
+  <h1 className="text-3xl font-bold text-gray-900 mb-2">{campaign.title}</h1>
+  <p className="text-base text-gray-600 mb-6">{campaign.description}</p>
 
-      <p className="text-gray-700 mb-6">{campaign.description}</p>
+  {/* Campaign Metadata */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white p-6 border border-gray-200 rounded-xl shadow-sm mb-10">
+    <div><span className="text-gray-500 text-sm">🎯 Goal</span><p className="font-medium text-gray-800">${campaign.donationGoal.toLocaleString()}</p></div>
+    <div><span className="text-gray-500 text-sm">💰 Tile Price</span><p className="font-medium text-gray-800">${campaign.tilePrice}</p></div>
+    <div><span className="text-gray-500 text-sm">🧩 Grid</span><p className="font-medium text-gray-800">{campaign.gridSize.width} × {campaign.gridSize.height}</p></div>
+    <div><span className="text-gray-500 text-sm">🔁 Refund Policy</span><p className="font-medium text-gray-800 capitalize">{campaign.refundPolicy}</p></div>
+    <div><span className="text-gray-500 text-sm">🔒 Escrow</span><p className="font-medium text-gray-800">{campaign.escrowEnabled ? "Yes" : "No"}</p></div>
+    <div><span className="text-gray-500 text-sm">📈 Funds Raised</span><p className="font-medium text-gray-800">${campaign.currentFunds.toLocaleString()}</p></div>
+    <div><span className="text-gray-500 text-sm">👥 Contributors</span><p className="font-medium text-gray-800">{campaign.contributorsCount}</p></div>
+    <div><span className="text-gray-500 text-sm">🟢 Status</span><p className="font-medium text-gray-800">{campaign.isCompleted ? "Completed" : "Active"}</p></div>
+  </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-600">
-        <div>
-          <strong>Goal:</strong> ${campaign.donationGoal.toLocaleString()}
-        </div>
-        <div>
-          <strong>Tile Price:</strong> ${campaign.tilePrice}
-        </div>
-        <div>
-          <strong>Grid:</strong> {campaign.gridSize.width} ×{" "}
-          {campaign.gridSize.height}
-        </div>
-        <div>
-          <strong>Refund Policy:</strong> {campaign.refundPolicy}
-        </div>
-        <div>
-          <strong>Escrow:</strong> {campaign.escrowEnabled ? "Yes" : "No"}
-        </div>
-        <div>
-          <strong>Funds Raised:</strong> $
-          {campaign.currentFunds.toLocaleString()}
-        </div>
-        <div>
-          <strong>Contributors:</strong> {campaign.contributorsCount}
-        </div>
-        <div>
-          <strong>Status:</strong>{" "}
-          {campaign.isCompleted ? "Completed" : "Active"}
-        </div>
-      </div>
+  {/* Pixel Canvas */}
+  <div className="mt-12">
+    <h2 className="text-xl font-semibold text-gray-900 mb-3">🖌️ Put your pixel!</h2>
+    <PixelCanvas campaign={campaign} onDonate={(data) => setCampaign(data)} />
+  </div>
 
-      <div className="mt-10">
-        <h2 className="text-xl font-semibold mb-2">Put your pixel!</h2>
-        <PixelCanvas
-          campaign={campaign}
-          onDonate={(data) => setCampaign(data)}
-        />
-      </div>
-      <div className="mt-10">
-        <h2 className="text-xl font-semibold mb-2">Leaderboard</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full table-auto border border-gray-200 rounded-md shadow-sm">
-            <thead className="bg-gray-100 text-left">
-              <tr>
-                <th className="px-4 py-2 border-b">#</th>
-                <th className="px-4 py-2 border-b">Name</th>
-                <th className="px-4 py-2 border-b">Tiles Placed</th>
-                <th className="px-4 py-2 border-b">Amount Donated</th>
+  {/* Leaderboard */}
+  <div className="mt-12">
+    <h2 className="text-xl font-semibold text-gray-900 mb-3">🏆 Leaderboard</h2>
+    <div className="overflow-x-auto bg-white border border-gray-200 rounded-xl shadow-sm">
+      <table className="min-w-full text-sm">
+        <thead className="bg-gray-50 border-b text-gray-600 uppercase text-xs">
+          <tr>
+            <th className="px-4 py-3 text-left">#</th>
+            <th className="px-4 py-3 text-left">Name</th>
+            <th className="px-4 py-3 text-left">Tiles</th>
+            <th className="px-4 py-3 text-left">Donated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {campaign.leaderboard
+            .toSorted((a, b) => b.amountDonated - a.amountDonated)
+            .map((entry, index) => (
+              <tr key={entry.user._id} className="hover:bg-gray-50 border-b">
+                <td className="px-4 py-3 font-medium text-gray-700">{index + 1}</td>
+                <td className="px-4 py-3 text-gray-800">{entry.user.name}</td>
+                <td className="px-4 py-3 text-gray-700">{entry.tilesPlaced}</td>
+                <td className="px-4 py-3 text-gray-700">${entry.amountDonated}</td>
               </tr>
-            </thead>
-            <tbody>
-              {campaign.leaderboard
-                .toSorted((a, b) => b.amountDonated - a.amountDonated) // optional: sort by top donor
-                .map((entry, index) => (
-                  <tr key={entry.user._id} className="hover:bg-gray-50">
-                    <td className="px-4 py-2 border-b">{index + 1}</td>
-                    <td className="px-4 py-2 border-b">{entry.user.name}</td>
-                    <td className="px-4 py-2 border-b">{entry.tilesPlaced}</td>
-                    <td className="px-4 py-2 border-b">
-                      ${entry.amountDonated}
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+            ))}
+        </tbody>
+      </table>
     </div>
+  </div>
+</div>
+
   );
 }
 

@@ -13,45 +13,46 @@ type HomeProps = {
 
 export default function Home({ campaigns }: Readonly<HomeProps>) {
   return (
-    <div className="flex flex-col items-center min-h-screen gap-5 w-full p-6">
-      <h1 className="text-4xl font-bold mt-10">Active Campaigns</h1>
+  <div className="flex flex-col items-center min-h-screen gap-6 w-full px-4 py-10 bg-[#f9fafb]">
+  <h1 className="text-4xl font-semibold tracking-tight text-gray-900">Active Campaigns</h1>
 
-      {campaigns.length === 0 ? (
-        <p className="text-gray-500 mt-4">No campaigns available yet.</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 w-full max-w-6xl">
-          {campaigns.map((campaign) => (
-            <Link
-              href={`/campaigns/${campaign._id}`}
-              key={campaign._id}
-              className="border rounded-lg overflow-hidden shadow hover:shadow-md transition bg-white"
-            >
-              {campaign.imageTemplateUrl && (
-                <Image
-                  src={campaign.imageTemplateUrl.replace(
-                    "ipfs://",
-                    "https://ipfs.io/ipfs/"
-                  )}
-                  alt={campaign.title}
-                  width={600}
-                  height={400}
-                  className="w-full object-cover"
-                />
+  {campaigns.length === 0 ? (
+    <p className="text-gray-500 mt-6 text-base">No campaigns available yet.</p>
+  ) : (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+      {campaigns.map((campaign) => (
+        <Link
+          href={`/campaigns/${campaign._id}`}
+          key={campaign._id}
+          className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-200"
+        >
+          {campaign.imageTemplateUrl && (
+            <Image
+              src={campaign.imageTemplateUrl.replace(
+                "ipfs://",
+                "https://ipfs.io/ipfs/"
               )}
-              <div className="p-4">
-                <h2 className="text-xl font-semibold">{campaign.title}</h2>
-                <p className="text-sm text-gray-600 mt-1 line-clamp-2">
-                  {campaign.description}
-                </p>
-                <p className="mt-2 text-xs text-gray-500">
-                  Goal: ${campaign.donationGoal.toLocaleString()}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
+              alt={campaign.title}
+              width={600}
+              height={400}
+              className="w-full h-52 object-contain"
+            />
+          )}
+          <div className="p-5">
+            <h2 className="text-lg font-medium text-gray-900">{campaign.title}</h2>
+            <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+              {campaign.description}
+            </p>
+            <p className="mt-3 text-xs text-gray-500">
+              🎯 Goal: <span className="font-medium text-gray-700">${campaign.donationGoal.toLocaleString()}</span>
+            </p>
+          </div>
+        </Link>
+      ))}
     </div>
+  )}
+</div>
+
   );
 }
 

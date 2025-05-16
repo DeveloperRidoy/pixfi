@@ -39,22 +39,23 @@ export default function CreateCampaign() {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center px-4 py-10">
-      <div className="max-w-2xl w-full space-y-8 bg-white p-6 md:p-10 rounded-xl shadow-sm border border-primary/10">
-        <div className="text-center space-y-1">
-          <h1 className="text-3xl font-semibold">Create an Campaign</h1>
-          <p className="text-muted-foreground text-sm mt-1">
-            Fill in the campaign details below to create a new campaign.
-          </p>
-        </div>
-
-        <CampaignForm
-          requestUrl="api/campaigns"
-          requestMethod={EApiRequestMethod.POST}
-          onSuccess={onSuccess}
-        />
-      </div>
+    <div className="w-full min-h-screen flex flex-col items-center bg-[#f9fafb] px-4 py-12">
+  <div className="max-w-2xl w-full space-y-10 bg-white px-6 py-10 md:px-10 rounded-2xl shadow-md border border-gray-200">
+    <div className="text-center space-y-2">
+      <h1 className="text-3xl font-semibold text-gray-900">Create a Campaign</h1>
+      <p className="text-sm text-gray-500">
+        Fill in the campaign details below to create a new campaign.
+      </p>
     </div>
+
+    <CampaignForm
+      requestUrl="api/campaigns"
+      requestMethod={EApiRequestMethod.POST}
+      onSuccess={onSuccess}
+    />
+  </div>
+</div>
+
   );
 }
 
